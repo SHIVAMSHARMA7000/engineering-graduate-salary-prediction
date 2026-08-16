@@ -2,15 +2,25 @@
 
 An end-to-end Machine Learning application that predicts the expected salary of an engineering graduate based on academic performance, aptitude scores, educational background, college information, domain skills, and personality traits.
 
-The trained Machine Learning model is integrated with a **FastAPI REST API** and connected to a **HTML, CSS and JavaScript frontend** for real-time salary prediction.
+The project includes a complete Machine Learning pipeline, FastAPI REST API, and an interactive HTML/CSS/JavaScript frontend.
 
 ---
 
-## 🚀 Project Overview
+## 🚀 Live Demo
 
-The objective of this project is to build a complete Machine Learning application starting from data analysis and model development to API integration and frontend deployment.
+### 🌐 Web Application
 
-The application takes graduate information from the user and predicts the expected salary using a trained **Ridge Regression** model.
+**[Engineering Graduate Salary Predictor](https://engineering-graduate-salary-predict.vercel.app/)**
+
+The frontend is deployed on Vercel and communicates with the deployed FastAPI backend for real-time salary predictions.
+
+---
+
+## 📌 Project Overview
+
+The goal of this project is to build an end-to-end Machine Learning application that can estimate the expected salary of an engineering graduate using different academic, aptitude, domain and personality features.
+
+The project covers the complete workflow from data analysis and model development to API development and cloud deployment.
 
 ### Complete Project Flow
 
@@ -35,6 +45,8 @@ FastAPI REST API
    ↓
 Frontend Integration
    ↓
+Cloud Deployment
+   ↓
 Salary Prediction
 ```
 
@@ -44,11 +56,13 @@ Salary Prediction
 
 ## Model Used
 
+The final Machine Learning model used in this project is:
+
 **Ridge Regression**
 
-Ridge Regression was selected as the final model after experimenting with different regression approaches during model development.
+Ridge Regression was selected as the final model after experimenting with different regression approaches during the model development process.
 
-The salary target was transformed using a logarithmic transformation during training:
+The salary target was transformed using a logarithmic transformation:
 
 ```python
 y_log = np.log1p(y)
@@ -60,7 +74,7 @@ During prediction, the output is converted back to the original salary scale:
 predicted_salary = np.expm1(prediction)
 ```
 
-This transformation helps reduce the impact of extreme salary values and makes the target distribution more suitable for regression modeling.
+This transformation helps reduce the effect of extreme salary values and makes the target distribution more suitable for regression modeling.
 
 ---
 
@@ -68,20 +82,23 @@ This transformation helps reduce the impact of extreme salary values and makes t
 
 The model uses academic, aptitude, domain and personality-related features.
 
-## Academic & Personal Features
+## 👤 Personal Information
 
 - Gender
+- Age
+- Graduation Year
+- College State
+
+## 🎓 Education Information
+
 - Degree
 - Specialization
-- College State
 - 10th Board
 - 12th Board
 - College Tier
 - College City Tier
-- Graduation Year
-- Age
 
-## Aptitude & Domain Features
+## 📊 Aptitude & Domain Information
 
 - Overall Score
 - English Score
@@ -91,7 +108,7 @@ The model uses academic, aptitude, domain and personality-related features.
 - Best Domain
 - Best Domain Score
 
-## Personality Features
+## 🧠 Personality Information
 
 - Conscientiousness
 - Agreeableness
@@ -103,7 +120,7 @@ The model uses academic, aptitude, domain and personality-related features.
 
 # 🔄 Prediction Pipeline
 
-When a user submits the form, the following pipeline is executed:
+When a user submits the form, the following process takes place:
 
 ```text
 User Input
@@ -131,7 +148,7 @@ Frontend Result
 
 ---
 
-# ⚙️ Tech Stack
+# 🛠️ Tech Stack
 
 ## Machine Learning
 
@@ -154,12 +171,17 @@ Frontend Result
 - CSS3
 - JavaScript
 
-## Tools
+## Deployment
 
-- Jupyter Notebook
-- VS Code
-- Git
 - GitHub
+- Render
+- Vercel
+
+## Development Tools
+
+- VS Code
+- Jupyter Notebook
+- Git
 
 ---
 
@@ -169,8 +191,8 @@ Frontend Result
 Engineering-Graduate-Salary-Prediction/
 │
 ├── main.py
-├── requirements.txt
 ├── README.md
+├── requirements.txt
 ├── .gitignore
 │
 ├── models/
@@ -183,7 +205,7 @@ Engineering-Graduate-Salary-Prediction/
 │   └── script.js
 │
 └── notebooks/
-    └── salary_prediction.ipynb
+    └── Engineering_graduate_salary_prediction.ipynb
 ```
 
 ---
@@ -192,7 +214,7 @@ Engineering-Graduate-Salary-Prediction/
 
 The trained Machine Learning model is served through a REST API using FastAPI.
 
-## Available Endpoints
+## API Endpoints
 
 ### Home
 
@@ -202,7 +224,7 @@ GET /
 
 Returns a message confirming that the API is running.
 
-Example response:
+Example:
 
 ```json
 {
@@ -259,22 +281,99 @@ Accepts student information in JSON format and returns the predicted salary.
 
 ---
 
+# 📚 API Documentation
+
+FastAPI automatically provides interactive API documentation through Swagger UI.
+
+The deployed backend can be tested using the `/docs` endpoint.
+
+```text
+https://YOUR-RENDER-URL.onrender.com/docs
+```
+
+Swagger allows the `/predict` endpoint to be tested directly by entering JSON input.
+
+---
+
 # 🖥️ Frontend
 
-The project includes a responsive web interface built using HTML, CSS and JavaScript.
+The project includes a responsive web interface developed using HTML, CSS and JavaScript.
 
-The frontend allows users to enter:
+The frontend provides dropdown menus and input fields for:
 
 - Personal information
 - Academic information
 - College information
 - Aptitude scores
 - Domain scores
-- Personality scores
+- Personality traits
 
-The categorical features are provided through dropdown menus to reduce invalid inputs.
+The frontend collects the user input and sends it to the FastAPI backend using JavaScript `fetch()`.
 
-The frontend communicates with the FastAPI backend using JavaScript `fetch()` and JSON requests.
+The predicted salary is then displayed dynamically on the webpage.
+
+---
+
+# 🌐 Deployment Architecture
+
+The application is deployed using separate frontend and backend services.
+
+```text
+                    USER
+                     │
+                     ▼
+        ┌─────────────────────────┐
+        │      Vercel             │
+        │   HTML + CSS + JS       │
+        └────────────┬────────────┘
+                     │
+                     │ POST /predict
+                     ▼
+        ┌─────────────────────────┐
+        │       Render            │
+        │      FastAPI API        │
+        └────────────┬────────────┘
+                     │
+                     ▼
+        ┌─────────────────────────┐
+        │     Preprocessor        │
+        │       .pkl              │
+        └────────────┬────────────┘
+                     │
+                     ▼
+        ┌─────────────────────────┐
+        │    Ridge Regression     │
+        │        Model            │
+        └────────────┬────────────┘
+                     │
+                     ▼
+              Predicted Salary
+                     │
+                     ▼
+              Frontend Result
+```
+
+---
+
+# ☁️ Deployment
+
+## Frontend
+
+The frontend is deployed on:
+
+**Vercel**
+
+Live application:
+
+https://engineering-graduate-salary-predict.vercel.app/
+
+## Backend
+
+The FastAPI backend is deployed on:
+
+**Render**
+
+The backend exposes the `/predict` REST API used by the frontend.
 
 ---
 
@@ -290,7 +389,126 @@ Contains the trained Ridge Regression model.
 
 Contains the preprocessing pipeline used during model training.
 
-The same preprocessing pipeline is used during inference so that new user inputs are transformed in the same way as the training data.
+The same preprocessing pipeline is used during inference to ensure that new user inputs are transformed consistently with the training data.
+
+---
+
+# 📦 Dataset
+
+The original dataset is not included in the repository.
+
+The dataset contains information related to engineering graduates, including:
+
+- Academic performance
+- Aptitude scores
+- Domain information
+- College information
+- Personality traits
+- Salary information
+
+The dataset is excluded from the GitHub repository to keep the repository lightweight and avoid redistributing the original dataset.
+
+---
+
+# 🔬 Machine Learning Workflow
+
+The notebook contains the complete model development process:
+
+1. Data Loading
+2. Data Understanding
+3. Exploratory Data Analysis
+4. Missing Value Analysis
+5. Data Cleaning
+6. Feature Engineering
+7. Categorical Feature Processing
+8. Numerical Feature Processing
+9. Train-Test Split
+10. Target Transformation
+11. Model Training
+12. Model Evaluation
+13. Model Selection
+14. Model Serialization
+15. API Integration
+16. Deployment
+
+---
+
+# 🧪 Example Prediction
+
+A user can enter information such as:
+
+```text
+Gender: Male
+Degree: B.Tech/B.E.
+Specialization: Computer Science & Engineering
+College State: Uttar Pradesh
+10th Board: CBSE
+12th Board: CBSE
+Best Domain: ComputerScience
+
+Overall Score: 78.5
+English: 75
+Logical: 82
+Quant: 76
+Domain: 85
+Best Domain Score: 88
+
+College Tier: 2
+College City Tier: 1
+Graduation Year: 2024
+Age: 22
+
+Conscientiousness: 0.5
+Agreeableness: 0.6
+Extraversion: 0.4
+Neuroticism: -0.2
+Openness to Experience: 0.7
+```
+
+The application processes these values and returns an estimated salary.
+
+---
+
+# 🔐 Input Validation
+
+FastAPI uses Pydantic models to validate incoming API requests.
+
+Example:
+
+```python
+class Student(BaseModel):
+    Gender: str
+    Degree: str
+    Specialization: str
+    CollegeState: str
+    board10: str
+    board12: str
+    best_domain_name: str
+
+    score: float
+    English: float
+    Logical: float
+    Quant: float
+    Domain: float
+    best_domain_score: float
+
+    CollegeTier: int
+    CollegeCityTier: int
+    GraduationYear: int
+    age: float
+```
+
+This helps ensure that the API receives data in the expected format.
+
+---
+
+# 🔐 CORS
+
+Since the frontend and backend are deployed separately, Cross-Origin Resource Sharing (CORS) is required for communication between the two services.
+
+The FastAPI backend is configured to accept requests from the frontend.
+
+For production environments, CORS can be restricted to the specific frontend domain.
 
 ---
 
@@ -299,13 +517,13 @@ The same preprocessing pipeline is used during inference so that new user inputs
 ## 1. Clone the Repository
 
 ```bash
-git clone <your-github-repository-url>
+git clone https://github.com/SHIVAMSHARMA7000/engineering-graduate-salary-prediction.git
 ```
 
 Move into the project directory:
 
 ```bash
-cd Engineering-Graduate-Salary-Prediction
+cd engineering-graduate-salary-prediction
 ```
 
 ---
@@ -318,7 +536,7 @@ For Windows:
 python -m venv venv
 ```
 
-Activate the virtual environment:
+Activate it:
 
 ```bash
 venv\Scripts\activate
@@ -334,7 +552,7 @@ pip install -r requirements.txt
 
 ---
 
-## 4. Start FastAPI Server
+## 4. Start FastAPI
 
 ```bash
 uvicorn main:app --reload
@@ -348,135 +566,36 @@ http://127.0.0.1:8000
 
 ---
 
-# 📚 API Documentation
-
-FastAPI automatically generates interactive API documentation using Swagger UI.
-
-Open:
+## 5. Open Swagger
 
 ```text
 http://127.0.0.1:8000/docs
 ```
 
-The `/predict` endpoint can be tested directly from the Swagger interface.
+Use Swagger UI to test the `/predict` endpoint.
 
 ---
 
-# 🌐 Run the Frontend
+# 🌐 Run Frontend Locally
 
-Open the `frontend` folder in VS Code.
-
-Run:
+Open the `frontend` folder.
 
 ```text
-index.html
+frontend/
+├── index.html
+├── style.css
+└── script.js
 ```
 
-using **Live Server**.
+The frontend can be opened using VS Code Live Server.
 
-The frontend sends prediction requests to the FastAPI backend.
-
-During local development, the JavaScript frontend communicates with:
-
-```text
-http://127.0.0.1:8000/predict
-```
-
-After deployment, this URL should be replaced with the deployed FastAPI backend URL.
-
----
-
-# 🔐 CORS
-
-Since the frontend and backend may run on different origins, CORS middleware is configured in FastAPI.
-
-Example:
-
-```python
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"]
-)
-```
-
-For production deployment, it is recommended to replace `*` with the actual frontend domain.
-
----
-
-# 📦 Dataset
-
-The original dataset is not included in this repository.
-
-The dataset contains information related to engineering graduates, including academic performance, aptitude scores, domain information, college details and personality traits.
-
-The dataset is excluded from the repository to keep the project lightweight and avoid redistributing the original dataset.
-
-The complete data analysis and model development workflow can be found in the Jupyter Notebook.
-
----
-
-# 📈 Machine Learning Workflow
-
-The notebook contains the complete model development process:
-
-1. Data Loading
-2. Data Understanding
-3. Exploratory Data Analysis
-4. Missing Value Analysis
-5. Data Cleaning
-6. Feature Engineering
-7. Categorical Feature Processing
-8. Numerical Feature Processing
-9. Train-Test Split
-10. Model Training
-11. Model Evaluation
-12. Target Transformation
-13. Model Selection
-14. Model Serialization
-
----
-
-# 🚀 Deployment
-
-The application can be deployed as two separate components.
-
-## Backend
-
-Possible platforms:
-
-- Render
-- Railway
-- AWS
-- Azure
-
-The FastAPI backend can be started in production using:
-
-```bash
-uvicorn main:app --host 0.0.0.0 --port $PORT
-```
-
-## Frontend
-
-Possible platforms:
-
-- Vercel
-- Netlify
-- GitHub Pages
-
-After deploying the FastAPI backend, update the API URL inside:
-
-```text
-frontend/script.js
-```
+During local development, make sure the API URL in `script.js` points to the correct FastAPI backend.
 
 Example:
 
 ```javascript
 const response = await fetch(
-    "https://your-api-domain.com/predict",
+    "http://127.0.0.1:8000/predict",
     {
         method: "POST",
         headers: {
@@ -487,28 +606,47 @@ const response = await fetch(
 );
 ```
 
+For the deployed application, the frontend uses the deployed Render API URL.
+
 ---
 
-# 🔮 Future Improvements
+# 📈 Model Evaluation
 
-- Experiment with Random Forest and XGBoost
+The project evaluates regression performance using common regression metrics such as:
+
+- Mean Absolute Error (MAE)
+- Mean Squared Error (MSE)
+- Root Mean Squared Error (RMSE)
+- R² Score
+
+The complete experiments and model comparisons are available in the Jupyter Notebook.
+
+---
+
+# 🚀 Future Improvements
+
+Some possible improvements for the project include:
+
 - Hyperparameter tuning
-- Improve prediction performance
-- Add salary range prediction
-- Add prediction confidence/uncertainty
-- Add data visualizations
-- Add database integration
-- Add user authentication
-- Add model monitoring
-- Dockerize the application
-- Add CI/CD pipeline
-- Deploy the complete application
+- Experimenting with Random Forest and XGBoost
+- Improving model performance
+- Cross-validation
+- Feature importance analysis
+- Salary range prediction
+- Prediction confidence/uncertainty
+- Database integration
+- User authentication
+- Model monitoring
+- Dockerization
+- CI/CD pipeline
+- Improved UI/UX
+- Custom domain integration
 
 ---
 
 # 🎯 Key Learning Outcomes
 
-This project provided hands-on experience with:
+Through this project, I gained hands-on experience with:
 
 - End-to-end Machine Learning workflow
 - Exploratory Data Analysis
@@ -518,32 +656,60 @@ This project provided hands-on experience with:
 - Target transformation
 - Model evaluation
 - Model serialization using Joblib
-- REST API development using FastAPI
-- Pydantic data validation
+- FastAPI REST API development
+- Pydantic validation
 - Frontend-backend integration
-- CORS configuration
-- Swagger API testing
+- CORS
 - Git and GitHub
-- Machine Learning deployment
+- Cloud deployment
+- API testing using Swagger
+- Frontend deployment using Vercel
+- Backend deployment using Render
+
+---
+
+# ⭐ Highlights
+
+- ✅ End-to-end Machine Learning project
+- ✅ Ridge Regression model
+- ✅ Custom preprocessing pipeline
+- ✅ FastAPI REST API
+- ✅ Swagger API documentation
+- ✅ Interactive frontend
+- ✅ Frontend deployed on Vercel
+- ✅ Backend deployed on Render
+- ✅ Real-time prediction
+- ✅ GitHub version control
 
 ---
 
 # 👨‍💻 Author
 
-**Shivam Sharma**
+## Shivam Sharma
 
 B.Tech CSE (AI/ML) Student
 
-### Areas of Interest
+Interested in:
 
 - Machine Learning
 - Data Science
+- Artificial Intelligence
 - Backend Development
 - FastAPI
-- AI/ML Deployment
+- Machine Learning Deployment
 
 ---
 
-## ⭐ Project
+# 🔗 Project Links
 
-If you found this project interesting, feel free to explore the repository.
+### 🌐 Live Application
+
+https://engineering-graduate-salary-predict.vercel.app/
+
+### 💻 GitHub Repository
+
+https://github.com/SHIVAMSHARMA7000/engineering-graduate-salary-prediction
+
+---
+
+## ⭐ If you found this project interesting, feel free to explore the repository and give it a star!
