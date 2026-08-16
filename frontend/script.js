@@ -10,6 +10,10 @@ const errorBox = document.getElementById("error");
 const loading = document.getElementById("loading");
 
 
+// ========================================
+// Form Submit
+// ========================================
+
 form.addEventListener("submit", async function (event) {
 
     // Prevent page reload
@@ -27,9 +31,9 @@ form.addEventListener("submit", async function (event) {
     predictButton.disabled = true;
 
 
-    // =========================
-    // Collect form data
-    // =========================
+    // ========================================
+    // Collect Form Data
+    // ========================================
 
     const data = {
 
@@ -54,6 +58,10 @@ form.addEventListener("submit", async function (event) {
         best_domain_name:
             document.getElementById("best_domain_name").value,
 
+
+        // ========================================
+        // Aptitude Scores
+        // ========================================
 
         score:
             parseFloat(
@@ -86,6 +94,10 @@ form.addEventListener("submit", async function (event) {
             ),
 
 
+        // ========================================
+        // College & Personal Information
+        // ========================================
+
         CollegeTier:
             parseInt(
                 document.getElementById("CollegeTier").value
@@ -106,6 +118,10 @@ form.addEventListener("submit", async function (event) {
                 document.getElementById("age").value
             ),
 
+
+        // ========================================
+        // Personality Features
+        // ========================================
 
         conscientiousness:
             parseFloat(
@@ -134,17 +150,18 @@ form.addEventListener("submit", async function (event) {
     };
 
 
+    // Check data in browser console
     console.log("Sending data:", data);
 
 
+    // ========================================
+    // Send Data to Deployed FastAPI
+    // ========================================
+
     try {
 
-        // =========================
-        // Send request to FastAPI
-        // =========================
-
         const response = await fetch(
-            "http://127.0.0.1:8000/predict",
+            "https://engineering-graduate-salary-prediction.onrender.com/predict",
             {
                 method: "POST",
 
@@ -157,9 +174,9 @@ form.addEventListener("submit", async function (event) {
         );
 
 
-        // =========================
-        // Handle API error
-        // =========================
+        // ========================================
+        // Handle API Error
+        // ========================================
 
         if (!response.ok) {
 
@@ -173,18 +190,18 @@ form.addEventListener("submit", async function (event) {
         }
 
 
-        // =========================
-        // Get response
-        // =========================
+        // ========================================
+        // Get API Response
+        // ========================================
 
         const result = await response.json();
 
         console.log("API Response:", result);
 
 
-        // =========================
-        // Format salary
-        // =========================
+        // ========================================
+        // Format Salary
+        // ========================================
 
         const salary = Number(
             result.predicted_salary
@@ -193,9 +210,9 @@ form.addEventListener("submit", async function (event) {
         });
 
 
-        // =========================
-        // Display result
-        // =========================
+        // ========================================
+        // Display Prediction
+        // ========================================
 
         salaryText.textContent = `₹ ${salary}`;
 
@@ -207,16 +224,20 @@ form.addEventListener("submit", async function (event) {
         console.error("Error:", error);
 
         errorBox.textContent =
-            "Unable to connect to the prediction API. Make sure FastAPI is running.";
+            "Unable to connect to the prediction API. Please try again.";
 
         errorBox.classList.remove("hidden");
 
+
     } finally {
 
-        // Hide loading
+        // ========================================
+        // Hide Loading
+        // ========================================
+
         loading.classList.add("hidden");
 
-        // Enable button
+        // Enable button again
         predictButton.disabled = false;
 
     }
