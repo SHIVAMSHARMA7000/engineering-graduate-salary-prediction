@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Engineering Graduate Salary Predictor</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="page">
+
+        <!-- Header -->
+        <header class="header">
+
+            <div class="badge">
+                MACHINE LEARNING PROJECT
+            </div>
+
+            <h1>Engineering Graduate<br>
+                <span>Salary Predictor</span>
+            </h1>
+
+            <p>
+                Enter your academic, aptitude and personality details
+                to estimate your expected salary.
+            </p>
+
+        </header>
+
+
+        <!-- Main Card -->
+        <main class="card">
+
+            <form id="predictionForm">
+
+                <!-- =========================
+                     PERSONAL INFORMATION
+                ========================== -->
+
+                <section>
+
+                    <div class="section-title">
+                        <div class="icon">👤</div>
+
+                        <div>
+                            <h2>Personal Information</h2>
+                            <p>Basic information about the graduate</p>
+                        </div>
+                    </div>
+
+
+                    <div class="form-grid">
+
+                        <!-- Gender -->
+                        <div class="form-group">
+
+                            <label for="Gender">
+                                Gender
+                            </label>
+
+                            <select id="Gender" name="Gender" required>
+
+                                <option value="">
+                                    Select Gender
+                                </option>
+
+                                <option value="f">
+                                    Female
+                                </option>
+
+                                <option value="m">
+                                    Male
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <!-- Age -->
+                        <div class="form-group">
+
+                            <label for="age">
+                                Age
+                            </label>
+
+                            <input
+                                type="number"
+                                id="age"
+                                name="age"
+                                min="18"
+                                max="60"
+                                step="0.1"
+                                placeholder="e.g. 22"
+                                required
+                            >
+
+                        </div>
+
+
+                        <!-- Graduation Year -->
+                        <div class="form-group">
+
+                            <label for="GraduationYear">
+                                Graduation Year
+                            </label>
+
+                            <input
+                                type="number"
+                                id="GraduationYear"
+                                name="GraduationYear"
+                                min="2000"
+                                max="2035"
+                                placeholder="e.g. 2024"
+                                required
+                            >
+
+                        </div>
+
+
+                        <!-- College State -->
+                        <div class="form-group">
+
+                            <label for="CollegeState">
+                                College State
+                            </label>
+
+                            <select
+                                id="CollegeState"
+                                name="CollegeState"
+                                required
+                            >
+
+                                <option value="">
+                                    Select College State
+                                </option>
+
+                                <option value="Delhi">Delhi</option>
+                                <option value="Uttar Pradesh">Uttar Pradesh</option>
+                                <option value="Maharashtra">Maharashtra</option>
+                                <option value="Tamil Nadu">Tamil Nadu</option>
+                                <option value="Punjab">Punjab</option>
+                                <option value="West Bengal">West Bengal</option>
+                                <option value="Telangana">Telangana</option>
+                                <option value="Andhra Pradesh">Andhra Pradesh</option>
+                                <option value="Haryana">Haryana</option>
+                                <option value="Karnataka">Karnataka</option>
+                                <option value="Orissa">Orissa</option>
+                                <option value="Chhattisgarh">Chhattisgarh</option>
+                                <option value="Rajasthan">Rajasthan</option>
+                                <option value="Madhya Pradesh">Madhya Pradesh</option>
+                                <option value="Uttarakhand">Uttarakhand</option>
+                                <option value="Gujarat">Gujarat</option>
+                                <option value="Jharkhand">Jharkhand</option>
+                                <option value="Other">Other</option>
+                                <option value="Kerala">Kerala</option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- =========================
+                     EDUCATION
+                ========================== -->
+
+                <section>
+
+                    <div class="section-title">
+
+                        <div class="icon">🎓</div>
+
+                        <div>
+                            <h2>Education</h2>
+                            <p>Academic background and college details</p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-grid">
+
+                        <!-- Degree -->
+                        <div class="form-group">
+
+                            <label for="Degree">
+                                Degree
+                            </label>
+
+                            <select
+                                id="Degree"
+                                name="Degree"
+                                required
+                            >
+
+                                <option value="">
+                                    Select Degree
+                                </option>
+
+                                <option value="B.Tech/B.E.">
+                                    B.Tech/B.E.
+                                </option>
+
+                                <option value="M.Tech./M.E.">
+                                    M.Tech./M.E.
+                                </option>
+
+                                <option value="MCA">
+                                    MCA
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <!-- Specialization -->
+                        <div class="form-group">
+
+                            <label for="Specialization">
+                                Specialization
+                            </label>
+
+                            <select
+                                id="Specialization"
+                                name="Specialization"
+                                required
+                            >
+
+                                <option value="">
+                                    Select Specialization
+                                </option>
+
+                                <option value="other">Other</option>
+
+                                <option value="computer science & engineering">
+                                    Computer Science & Engineering
+                                </option>
+
+                                <option value="telecommunication engineering">
+                                    Telecommunication Engineering
+                                </option>
+
+                                <option value="biotechnology">
+                                    Biotechnology
+                                </option>
+
+                                <option value="mechanical engineering">
+                                    Mechanical Engineering
+                                </option>
+
+                                <option value="information technology">
+                                    Information Technology
+                                </option>
+
+                                <option value="electronics and communication engineering">
+                                    Electronics & Communication Engineering
+                                </option>
+
+                                <option value="computer engineering">
+                                    Computer Engineering
+                                </option>
+
+                                <option value="computer application">
+                                    Computer Application
+                                </option>
+
+                                <option value="electrical engineering">
+                                    Electrical Engineering
+                                </option>
+
+                                <option value="electronics and electrical engineering">
+                                    Electronics & Electrical Engineering
+                                </option>
+
+                                <option value="electronics and instrumentation engineering">
+                                    Electronics & Instrumentation Engineering
+                                </option>
+
+                                <option value="civil engineering">
+                                    Civil Engineering
+                                </option>
+
+                                <option value="industrial engineering">
+                                    Industrial Engineering
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <!-- 10th Board -->
+                        <div class="form-group">
+
+                            <label for="board10">
+                                10th Board
+                            </label>
+
+                            <select
+                                id="board10"
+                                name="board10"
+                                required
+                            >
+
+                                <option value="">
+                                    Select 10th Board
+                                </option>
+
+                                <option value="CBSE">CBSE</option>
+                                <option value="State Board">State Board</option>
+                                <option value="ICSE">ICSE</option>
+                                <option value="Other">Other</option>
+                                <option value="Unknown">Unknown</option>
+                                <option value="SSC">SSC</option>
+
+                            </select>
+
+                        </div>
+
+
+                        <!-- 12th Board -->
+                        <div class="form-group">
+
+                            <label for="board12">
+                                12th Board
+                            </label>
+
+                            <select
+                                id="board12"
+                                name="board12"
+                                required
+                            >
+
+                                <option value="">
+                                    Select 12th Board
+                                </option>
+
+                                <option value="CBSE">CBSE</option>
+                                <option value="Other">Other</option>
+                                <option value="State Board">State Board</option>
+                                <option value="Unknown">Unknown</option>
+                                <option value="ICSE">ICSE</option>
+                                <option value="SSC">SSC</option>
+
+                            </select>
+
+                        </div>
+
+
+                        <!-- College Tier -->
+                        <div class="form-group">
+
+                            <label for="CollegeTier">
+                                College Tier
+                            </label>
+
+                            <select
+                                id="CollegeTier"
+                                name="CollegeTier"
+                                required
+                            >
+
+                                <option value="">
+                                    Select College Tier
+                                </option>
+
+                                <option value="1">
+                                    Tier 1
+                                </option>
+
+                                <option value="2">
+                                    Tier 2
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <!-- City Tier -->
+                        <div class="form-group">
+
+                            <label for="CollegeCityTier">
+                                College City Tier
+                            </label>
+
+                            <select
+                                id="CollegeCityTier"
+                                name="CollegeCityTier"
+                                required
+                            >
+
+                                <option value="">
+                                    Select City Tier
+                                </option>
+
+                                <option value="1">
+                                    Tier 1 City
+                                </option>
+
+                                <option value="0">
+                                    Other City
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- =========================
+                     APTITUDE
+                ========================== -->
+
+                <section>
+
+                    <div class="section-title">
+
+                        <div class="icon">📊</div>
+
+                        <div>
+                            <h2>Aptitude & Domain Scores</h2>
+                            <p>Enter your assessment scores</p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+
+                            <label for="score">
+                                Overall Score
+                            </label>
+
+                            <input
+                                type="number"
+                                id="score"
+                                name="score"
+                                step="0.01"
+                                min="0"
+                                placeholder="e.g. 78.5"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="English">
+                                English
+                            </label>
+
+                            <input
+                                type="number"
+                                id="English"
+                                name="English"
+                                step="0.01"
+                                min="0"
+                                placeholder="e.g. 75"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="Logical">
+                                Logical
+                            </label>
+
+                            <input
+                                type="number"
+                                id="Logical"
+                                name="Logical"
+                                step="0.01"
+                                min="0"
+                                placeholder="e.g. 82"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="Quant">
+                                Quant
+                            </label>
+
+                            <input
+                                type="number"
+                                id="Quant"
+                                name="Quant"
+                                step="0.01"
+                                min="0"
+                                placeholder="e.g. 76"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="Domain">
+                                Domain Score
+                            </label>
+
+                            <input
+                                type="number"
+                                id="Domain"
+                                name="Domain"
+                                step="0.01"
+                                min="0"
+                                placeholder="e.g. 85"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="best_domain_name">
+                                Best Domain
+                            </label>
+
+                            <select
+                                id="best_domain_name"
+                                name="best_domain_name"
+                                required
+                            >
+
+                                <option value="">
+                                    Select Best Domain
+                                </option>
+
+                                <option value="ComputerProgramming">
+                                    Computer Programming
+                                </option>
+
+                                <option value="ElectronicsAndSemicon">
+                                    Electronics & Semiconductor
+                                </option>
+
+                                <option value="MechanicalEngg">
+                                    Mechanical Engineering
+                                </option>
+
+                                <option value="ComputerScience">
+                                    Computer Science
+                                </option>
+
+                                <option value="TelecomEngg">
+                                    Telecommunication Engineering
+                                </option>
+
+                                <option value="Unknown">
+                                    Unknown
+                                </option>
+
+                                <option value="ElectricalEngg">
+                                    Electrical Engineering
+                                </option>
+
+                                <option value="CivilEngg">
+                                    Civil Engineering
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="best_domain_score">
+                                Best Domain Score
+                            </label>
+
+                            <input
+                                type="number"
+                                id="best_domain_score"
+                                name="best_domain_score"
+                                step="0.01"
+                                min="0"
+                                placeholder="e.g. 88"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- =========================
+                     PERSONALITY
+                ========================== -->
+
+                <section>
+
+                    <div class="section-title">
+
+                        <div class="icon">🧠</div>
+
+                        <div>
+                            <h2>Personality Traits</h2>
+                            <p>Personality assessment scores</p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+
+                            <label for="conscientiousness">
+                                Conscientiousness
+                            </label>
+
+                            <input
+                                type="number"
+                                id="conscientiousness"
+                                name="conscientiousness"
+                                step="0.01"
+                                placeholder="e.g. 0.5"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="agreeableness">
+                                Agreeableness
+                            </label>
+
+                            <input
+                                type="number"
+                                id="agreeableness"
+                                name="agreeableness"
+                                step="0.01"
+                                placeholder="e.g. 0.6"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="extraversion">
+                                Extraversion
+                            </label>
+
+                            <input
+                                type="number"
+                                id="extraversion"
+                                name="extraversion"
+                                step="0.01"
+                                placeholder="e.g. 0.4"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="nueroticism">
+                                Neuroticism
+                            </label>
+
+                            <input
+                                type="number"
+                                id="nueroticism"
+                                name="nueroticism"
+                                step="0.01"
+                                placeholder="e.g. -0.2"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="openess_to_experience">
+                                Openness to Experience
+                            </label>
+
+                            <input
+                                type="number"
+                                id="openess_to_experience"
+                                name="openess_to_experience"
+                                step="0.01"
+                                placeholder="e.g. 0.7"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- Button -->
+
+                <button
+                    type="submit"
+                    id="predictButton"
+                >
+
+                    <span>Predict My Salary</span>
+                    <span class="arrow">→</span>
+
+                </button>
+
+
+                <!-- Loading -->
+
+                <div
+                    id="loading"
+                    class="loading hidden"
+                >
+                    Calculating your predicted salary...
+                </div>
+
+            </form>
+
+
+            <!-- =========================
+                 RESULT
+            ========================== -->
+
+            <div
+                id="result"
+                class="result hidden"
+            >
+
+                <div class="result-icon">
+                    💰
+                </div>
+
+                <p class="result-label">
+                    Estimated Salary
+                </p>
+
+                <h2 id="salary">
+                    ₹ 0
+                </h2>
+
+                <p class="result-note">
+                    This prediction is generated using a trained
+                    Ridge Regression machine learning model.
+                </p>
+
+            </div>
+
+
+            <!-- Error -->
+
+            <div
+                id="error"
+                class="error hidden"
+            ></div>
+
+        </main>
+
+
+        <!-- Footer -->
+
+        <footer>
+            Engineering Graduate Salary Prediction • Machine Learning Project
+        </footer>
+
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
