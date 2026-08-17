@@ -646,7 +646,7 @@ Some possible improvements for the project include:
 
 # 🎯 Key Learning Outcomes
 
-Through this project, I gained hands-on experience with:
+Through this project, I gained hands-on experience with:-
 
 - End-to-end Machine Learning workflow
 - Exploratory Data Analysis
